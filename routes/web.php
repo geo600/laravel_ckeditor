@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Show add article Form
+Route::get('/articles/create', [ArticleController::class, 'create'])->middleware('auth');
+
+//Store an article
+Route::post('/articles', [ArticleController::class, 'store'])->middleware('auth');
+
+Route::post('/upload', [\App\Http\Controllers\EditorController::class, 'uploadimage'])
+    ->name('ckeditor.upload');
+
+
+//Show login Form
+Route::get('/login', [UserController::class, 'login'])->name('login');
+
+//Login User
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
