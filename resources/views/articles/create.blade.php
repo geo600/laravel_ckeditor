@@ -431,9 +431,14 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                // ckfinder: {
-                //     uploadUrl: '{{route('ckeditor.upload').'?_token='.csrf_token()}}'
-                // }
+                ckfinder: {
+                    uploadUrl: '{{route('ckeditor.upload').'?_token='.csrf_token()}}',
+                                // Define the CKFinder configuration (if necessary).
+                    options: {
+                        resourceType: 'Images'
+                    }
+                }
+
             })
             .then(editor => {
                 console.log(editor);

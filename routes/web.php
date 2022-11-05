@@ -19,18 +19,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Show add article Form
+//Show all article
+Route::get('/', [ArticleController::class, 'index']);
+
+//Show create form
 Route::get('/articles/create', [ArticleController::class, 'create'])->middleware('auth');
 
-//Store an article
+//Store article
 Route::post('/articles', [ArticleController::class, 'store'])->middleware('auth');
 
-Route::post('/upload', [\App\Http\Controllers\EditorController::class, 'uploadimage'])
+
+
+Route::post('/upload', [ArticleController::class, 'uploadimage'])
     ->name('ckeditor.upload');
 
 
 //Show login Form
-Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 //Login User
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);

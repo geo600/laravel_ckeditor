@@ -14,7 +14,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('articles.index', [
+            'heading' => 'Latest Articles',
+            'articles' => Article::latest()->paginate(6)
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('articles.create');
     }
 
     /**
